@@ -21,10 +21,10 @@ import static org.hamcrest.CoreMatchers.containsString;
  */
 
 public class Register extends BaseApi {
-    private static HashMap<String, Object> requestBody = new HashMap<String, Object>();
-    private static JSONObject requestBodyJson;
-    private static Faker faker = new Faker();
-    private static String userName = faker.address().firstName();;
+    private HashMap<String, Object> requestBody = new HashMap<String, Object>();
+    private JSONObject requestBodyJson;
+    private Faker faker = new Faker();
+    private String userName = faker.address().firstName();;
 
     @Test
     @Description("New account registration return 201")
