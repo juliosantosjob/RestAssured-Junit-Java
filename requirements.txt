@@ -1,0 +1,30 @@
+Functionals requirements
+
+### New account registration ###
+
+New account registration - 201 - OK
+Create an account with blank userName - 400 - OK
+Create an account with blank password - 400 - OK
+Create an account with blank username and password - 400
+Create an account with a password that does not contain special characters - 400
+Create an account with the same data as an existing account - 406
+
+### Login ###
+
+login successfully - 200
+Login with invalid username - 400
+Login with invalid password - 400
+Login with invalid username and password - 400
+
+### Add books to favorites list ###
+
+Access a list of available books - 200
+Add and remove a book from the favorites list - 200
+Add non-existent book - 400
+Added a book to my list without authorization - 401
+Added a book to my list with userid not correct - 401
+
+### Delete account ###
+
+Delete user - 204
+Delet non-existent user - 400
