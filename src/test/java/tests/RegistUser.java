@@ -20,11 +20,11 @@ import static org.hamcrest.CoreMatchers.containsString;
  * @author Julio C. Santos
  */
 
-public class Register extends BaseApi {
-    private HashMap<String, Object> requestBody = new HashMap<String, Object>();
-    private JSONObject requestBodyJson;
-    private Faker faker = new Faker();
-    private String userName = faker.address().firstName();;
+public class RegistUser extends BaseApi {
+    public static final HashMap<String, Object> requestBody = new HashMap<String, Object>();
+    public static JSONObject requestBodyJson;
+    private static final Faker faker = new Faker();
+    private static final String userName = faker.address().firstName();
 
     @Test
     @Description("New account registration return 201")
@@ -45,7 +45,7 @@ public class Register extends BaseApi {
                         containsString("username"),
                         containsString("books"))
                 .body(
-                        "username", is(userName),
+                        "username", equalTo(userName),
                         "books", empty());
     }
 
