@@ -1,4 +1,4 @@
-package support;
+package com.bookstore.support;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -14,14 +14,10 @@ import org.hamcrest.Matchers;
 import org.json.simple.JSONObject;
 import org.junit.BeforeClass;
 
-public class BaseApi {
-    protected static HashMap<String, Object> requestBody = new HashMap<String, Object>();
-    protected static JSONObject requestBodyJson;
-    protected static RequestSpecification httpRequest;
-    protected static Response response;
-    protected static JsonPath jsonPath;
+import static com.bookstore.support.PropertiesSupport.propLoad;
 
-    private static final String baseUrl = "https://bookstore.toolsqa.com";
+public class BaseApi {
+    private static final String baseUrl = propLoad("BASE_URL");
     private static final Long timeout = 3000L;
 
     @BeforeClass
