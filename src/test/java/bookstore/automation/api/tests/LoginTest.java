@@ -1,40 +1,29 @@
-package com.bookstore.specs;
+package bookstore.automation.api.tests;
 
-import com.bookstore.support.BaseApi;
+import bookstore.automation.api.domain.Login;
+import bookstore.automation.api.support.BaseApi;
 
 import org.apache.http.HttpStatus;
-import org.json.simple.JSONObject;
 import org.junit.Test;
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 
 import static org.hamcrest.Matchers.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Julio C. Santos
  */
 
-@Tag("regression")
-public class Login extends BaseApi {
-    public static final Map<String, Object> payload = new HashMap<>();
-    public static JSONObject payloadJson;
+public class LoginTest extends BaseApi {
 
     @Test
-    @Tag("login")
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
-        payload.put("userName", "QA_2");
-        payload.put("password", "Test@123");
-        payloadJson = new JSONObject(payload);
-
+        Login loginUsr = new Login("QA_2", "Test@123");
         RestAssured
                 .given()
-                .body(payloadJson.toJSONString())
+                .body(loginUsr)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then()
@@ -49,13 +38,10 @@ public class Login extends BaseApi {
     @Test
     @DisplayName("Login with invalid username return - 400")
     public void loginWithInvalidUsername() {
-        payload.put("userName", "invalid_userName");
-        payload.put("password", "Test@123");
-        payloadJson = new JSONObject(payload);
-
+        Login loginUsr = new Login("invalid_userName", "Test@123");
         RestAssured
                 .given()
-                .body(payloadJson.toJSONString())
+                .body(loginUsr)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then().body(
@@ -66,13 +52,10 @@ public class Login extends BaseApi {
     @Test
     @DisplayName("Login with invalid password return - 400")
     public void loginWithInvalidPassword() {
-        payload.put("userName", "QA_2");
-        payload.put("password", "invalid_password");
-        payloadJson = new JSONObject(payload);
-
+        Login loginUsr = new Login("QA_2", "invalid_password");
         RestAssured
                 .given()
-                .body(payloadJson.toJSONString())
+                .body(loginUsr)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then()
@@ -84,13 +67,10 @@ public class Login extends BaseApi {
     @Test
     @DisplayName("Login with invalid username and password  return - 400")
     public void loginWithInvalidUsernameAndPassword() {
-        payload.put("userName", "invalid_userName");
-        payload.put("password", "invalid_password");
-        payloadJson = new JSONObject(payload);
-
+        Login loginUsr = new Login("invalid_userName", "invalid_password");
         RestAssured
                 .given()
-                .body(payloadJson.toJSONString())
+                .body(loginUsr)
                 .when()
                 .post("/Account/v1/GenerateToken")
                 .then()
@@ -98,4 +78,5 @@ public class Login extends BaseApi {
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
     }
+
 }

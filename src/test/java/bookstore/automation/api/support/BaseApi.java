@@ -1,22 +1,21 @@
-package com.bookstore.support;
+package bookstore.automation.api.support;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import io.restassured.path.json.JsonPath;
-
-import java.util.HashMap;
 
 import org.hamcrest.Matchers;
-import org.json.simple.JSONObject;
 import org.junit.BeforeClass;
 
-import static com.bookstore.support.PropertiesSupport.propLoad;
+import static bookstore.automation.api.support.PropertiesSupport.propLoad;
+
+/**
+ * @author Julio C. Santos
+ */
 
 public class BaseApi {
+    // configurações principais do projeto
     private static final String baseUrl = propLoad("BASE_URL");
     private static final Long timeout = 3000L;
 
@@ -29,7 +28,7 @@ public class BaseApi {
         reqBuilder.setContentType(ContentType.JSON);
         RestAssured.requestSpecification = reqBuilder.build();
 
-        // Definindo 2 segundos como tempo maximo de espera para cada chamada
+        // Define um timeout para a execução de cada chamada
         ResponseSpecBuilder resBuilder = new ResponseSpecBuilder();
         resBuilder.expectResponseTime(Matchers.lessThan(timeout));
         RestAssured.responseSpecification = resBuilder.build();
