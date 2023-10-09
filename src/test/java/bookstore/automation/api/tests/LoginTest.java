@@ -25,7 +25,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body(
@@ -43,7 +43,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then().body(
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
@@ -57,7 +57,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .body(
                         "status", is("Failed"),
@@ -72,7 +72,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .body(
                         "status", is("Failed"),
