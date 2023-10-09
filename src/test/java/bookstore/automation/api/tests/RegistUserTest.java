@@ -28,7 +28,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .body(
@@ -47,7 +47,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -63,7 +63,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -79,7 +79,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -95,7 +95,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -115,7 +115,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_NOT_ACCEPTABLE)
                 .body(
