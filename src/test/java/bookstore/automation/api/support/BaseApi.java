@@ -23,7 +23,11 @@ public class BaseApi {
     @BeforeEach
     public void setup() {
         RestAssured.baseURI = baseUrl;
+<<<<<<< HEAD
         RestAssured.basePath = basePath;
+=======
+        RestAssured.basePath = "/Account/v1";
+>>>>>>> a4a5a5572fe816115e75b86921ca5e4407e21517
 
         // Definindo ContentTypeJson como padrão para todas as chamadas
         RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
