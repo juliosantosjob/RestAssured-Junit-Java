@@ -4,10 +4,11 @@ import bookstore.automation.api.domain.Login;
 import bookstore.automation.api.support.BaseApi;
 
 import org.apache.http.HttpStatus;
-import org.junit.Test;
+
 
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.*;
 
@@ -25,7 +26,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body(
@@ -43,7 +44,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then().body(
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
@@ -57,7 +58,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .body(
                         "status", is("Failed"),
@@ -72,7 +73,7 @@ public class LoginTest extends BaseApi {
                 .given()
                 .body(loginUsr)
                 .when()
-                .post("/Account/v1/GenerateToken")
+                .post("/GenerateToken")
                 .then()
                 .body(
                         "status", is("Failed"),

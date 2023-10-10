@@ -6,22 +6,24 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 
 import org.hamcrest.Matchers;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeEach;
 
-import static bookstore.automation.api.support.PropertiesSupport.propLoad;
+
+import static bookstore.automation.api.support.PropertiesSupport.getProperty;
 
 /**
  * @author Julio C. Santos
  */
 
 public class BaseApi {
-    // configurações principais do projeto
-    private static final String baseUrl = propLoad("BASE_URL");
+    private static final String baseUrl = getProperty("BASE_URL");
+    private static final String basePath = getProperty("BASE_PATH");
     private static final Long timeout = 3000L;
 
-    @BeforeClass
-    public static void setup() {
+    @BeforeEach
+    public void setup() {
         RestAssured.baseURI = baseUrl;
+        RestAssured.basePath = basePath;
 
         // Definindo ContentTypeJson como padrão para todas as chamadas
         RequestSpecBuilder reqBuilder = new RequestSpecBuilder();

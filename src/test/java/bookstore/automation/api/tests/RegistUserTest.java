@@ -3,7 +3,8 @@ package bookstore.automation.api.tests;
 import bookstore.automation.api.support.BaseApi;
 import bookstore.automation.api.domain.RegistUser;
 import org.apache.http.HttpStatus;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import com.github.javafaker.Faker;
 
@@ -28,7 +29,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_CREATED)
                 .body(
@@ -47,7 +48,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -63,7 +64,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -79,7 +80,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -95,7 +96,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
                 .body(
@@ -115,7 +116,7 @@ public class RegistUserTest extends BaseApi {
                 .given()
                 .body(UserRegistration)
                 .when()
-                .post("/Account/v1/User")
+                .post("/User")
                 .then()
                 .statusCode(HttpStatus.SC_NOT_ACCEPTABLE)
                 .body(
