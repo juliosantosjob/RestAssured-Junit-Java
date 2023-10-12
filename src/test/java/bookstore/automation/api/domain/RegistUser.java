@@ -4,7 +4,7 @@ public class RegistUser {
     private String userName;
     private String password;
 
-    RegistUser() {}
+    public RegistUser() {}
 
     public RegistUser(String userName, String password) {
         this.userName = userName;

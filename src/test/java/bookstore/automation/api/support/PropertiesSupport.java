@@ -11,7 +11,7 @@ public class PropertiesSupport {
     private static final String pathSystem = System.getProperty("user.dir");
     private static Properties prop;
 
-    public static String getProperty(String value) {
+    public static String getProp(String value) {
         prop = new Properties();
         try {
             InputStream input = new FileInputStream(pathSystem + pathProp);

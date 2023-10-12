@@ -6,8 +6,9 @@ import org.apache.http.HttpStatus;
 
 public class RequestsHelper {
 
-    public static String getToken(String userName, String Password) {
+    public static String getTokenLoginUer(String userName, String Password) {
         Login loginUsr = new Login(userName, Password);
+
         return RestAssured
                 .given()
                 .body(loginUsr)
@@ -16,6 +17,19 @@ public class RequestsHelper {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().path("token").toString();
+    }
+
+
+    public static String getUserId(String userName, String Password) {
+        Login loginUsr = new Login(userName, Password);
+        return RestAssured
+                .given()
+                .body(loginUsr)
+                .when()
+                .post("/User")
+                .then()
+                .statusCode(HttpStatus.SC_CREATED)
+                .extract().path("userID").toString();
     }
 
 }
