@@ -11,7 +11,7 @@ public class PropertiesSupport {
     private static final String pathSystem = System.getProperty("user.dir");
     private static Properties prop;
 
-    public static String getProp(String value) {
+    public static String getSecret(String secret) {
         prop = new Properties();
         try {
             InputStream input = new FileInputStream(pathSystem + pathProp);
@@ -19,7 +19,7 @@ public class PropertiesSupport {
         } catch (Exception e) {
             out.print("Error loading property: " + e);
         }
-        return prop.getProperty(value);
+        return prop.getProperty(secret);
     }
 
 }

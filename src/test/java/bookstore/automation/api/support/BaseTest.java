@@ -8,16 +8,11 @@ import io.restassured.http.ContentType;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 
-
-import static bookstore.automation.api.support.PropertiesSupport.getProp;
-
-/**
- * @author Julio C. Santos
- */
+import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 
 public class BaseTest {
-    private static final String baseUrl = getProp("BASE_URL");
-    private static final String basePath = getProp("BASE_PATH");
+    private static final String baseUrl = getSecret("BASE_URL");
+    private static final String basePath = getSecret("BASE_PATH");
     private static final Long timeout = 3000L;
 
     @BeforeEach

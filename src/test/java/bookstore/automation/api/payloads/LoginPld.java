@@ -5,12 +5,12 @@ import io.restassured.response.Response;
 
 public class LoginPld {
 
-    public static Response login(Object loginUsr, String s) {
-        return RestAssured
-                .given()
-                .body(loginUsr)
-                .when()
-                .post("/GenerateToken");
+    public static Response login(Object user) {
+        return RestAssured.
+                given().
+                body(user).
+                when().
+                post("/GenerateToken");
     }
 
 }

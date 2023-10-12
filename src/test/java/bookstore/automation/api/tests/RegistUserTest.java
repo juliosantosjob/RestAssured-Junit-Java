@@ -11,6 +11,7 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 
 import static bookstore.automation.api.payloads.RegistUserPld.registUser;
+import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -20,11 +21,13 @@ import static org.hamcrest.Matchers.*;
 public class RegistUserTest extends BaseTest {
     private final Faker faker = new Faker();
     private final String userName = faker.address().firstName();
+    private static final String password = getSecret("PASSWORD");
 
     @Test
     @DisplayName("Registration of a new account return 201")
     public void newAccountRegistration() {
-        RegistUser UserRegistration = new RegistUser(userName, "Mudar@123");
+        RegistUser UserRegistration = new RegistUser(userName, password);
+
         registUser(UserRegistration).then().
                 statusCode(HttpStatus.SC_CREATED).
                 body(
@@ -38,7 +41,8 @@ public class RegistUserTest extends BaseTest {
     @Test
     @DisplayName("Create an account with blank userName return 400")
     public void createAnAccountWithBlankUserName() {
-        RegistUser UserRegistration = new RegistUser("", "Mudar@123");
+        RegistUser UserRegistration = new RegistUser("", password);
+
         registUser(UserRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
@@ -50,6 +54,7 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with blank password return 400")
     public void createAnAccountWithBlankPassword() {
         RegistUser UserRegistration = new RegistUser(userName, "");
+
         registUser(UserRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
@@ -72,6 +77,7 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with a password that does not contain special characters return 400")
     public void createAnAccountWithaPasswordThatDoesNotContainSpecialCharacters() {
         RegistUser UserRegistration = new RegistUser(userName, "passwd");
+
         registUser(UserRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
@@ -86,7 +92,8 @@ public class RegistUserTest extends BaseTest {
     @Test
     @DisplayName("Create an account with the same data as an existing account return 400")
     public void createAnAccountWithTheSameDataAsAnExistingAccount() {
-        RegistUser UserRegistration = new RegistUser("user1", "Mudar@123");
+        RegistUser UserRegistration = new RegistUser("user1", password);
+
         registUser(UserRegistration).then().
                 statusCode(HttpStatus.SC_NOT_ACCEPTABLE).
                 body(

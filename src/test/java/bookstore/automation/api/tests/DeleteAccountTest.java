@@ -8,22 +8,27 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static bookstore.automation.api.payloads.DeleteAccountsPld.deletUser;
-import static bookstore.automation.api.payloads.LoginPld.login;
+import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 import static bookstore.automation.api.utils.RequestsHelper.getUserId;
 import static bookstore.automation.api.utils.RequestsHelper.getTokenLoginUer;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * @author Julio C. Santos
+ */
 
 public class DeleteAccountTest extends BaseTest {
     private static final Faker faker = new Faker();
     private static final String userName = faker.address().firstName();
+    private static final String password = getSecret("PASSWORD");
     private static String token;
     private static String accountId;
 
+
     @BeforeEach
     public void hookBefore() {
-        accountId = getUserId(userName, "Test@123");
-        token = getTokenLoginUer(userName, "Test@123");
+        accountId = getUserId(userName, password);
+        token = getTokenLoginUer(userName, password);
     }
 
     @Test
