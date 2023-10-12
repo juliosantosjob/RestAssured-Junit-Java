@@ -23,8 +23,7 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
         Login user = new Login(userName, password);
-        login(user).
-                then().
+        login(user).then().
                 statusCode(HttpStatus.SC_OK).
                 body(
                         "token", is(notNullValue()),
