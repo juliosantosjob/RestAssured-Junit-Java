@@ -34,9 +34,10 @@ public class DeleteAccountTest extends BaseTest {
     @Tag("dltAccount")
     @DisplayName("Delete account return - 204")
     public void deleteAccount() {
-        deletUser(token, accountId).then().
-                statusCode(HttpStatus.SC_NO_CONTENT).
-                body(is(""));
+        deletUser(token, accountId)
+                .then()
+                .statusCode(HttpStatus.SC_NO_CONTENT)
+                .body(is(""));
     }
 
     @Test
@@ -44,11 +45,12 @@ public class DeleteAccountTest extends BaseTest {
     @DisplayName("Delet non-existent user return code - 1207")
     public void deletNonExistentUser() {
         accountId = "invalid_user_id";
-        deletUser(token, accountId).then().
-                statusCode(HttpStatus.SC_OK).
-                body(
-                        "code", is("1207"),
-                        "message", is("User Id not correct!")
+        deletUser(token, accountId)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .body(
+                    "code", is("1207"),
+                    "message", is("User Id not correct!")
                 );
     }
 
