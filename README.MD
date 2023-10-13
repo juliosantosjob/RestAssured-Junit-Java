@@ -9,3 +9,6 @@ Antes de começar, certifique-se de que você tenha o seguinte instalado em seu 
 - Java (versão 8 ou superior)
 - Maven
 - IDE de sua escolha (como IntelliJ IDEA ou Eclipse)
+
+### Reportes do Projeto 
+para acessar o histórico das execução do projeto acesse: https://juliosantosjob.github.io/RestAssured-Junit-Java/
