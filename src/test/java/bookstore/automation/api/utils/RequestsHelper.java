@@ -26,7 +26,7 @@ public class RequestsHelper {
                 .when()
                 .post("/User")
                 .then()
-                .statusCode(HttpStatus.SC_CREATED).
+                .statusCode(HttpStatus.SC_CREATED)
                 .extract().path("userID").toString();
     }
 
