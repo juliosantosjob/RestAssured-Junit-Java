@@ -31,7 +31,7 @@ public class DeleteAccountTest extends BaseTest {
     }
 
     @Test
-    @Tag("deleteAccount")
+    @Tag("dltAccount")
     @DisplayName("Delete account return - 204")
     public void deleteAccount() {
         deletUser(token, accountId).then().
@@ -40,7 +40,7 @@ public class DeleteAccountTest extends BaseTest {
     }
 
     @Test
-    @Tag("DeletNonExistent")
+    @Tag("dltNonExistent")
     @DisplayName("Delet non-existent user return code - 1207")
     public void deletNonExistentUser() {
         accountId = "invalid_user_id";
