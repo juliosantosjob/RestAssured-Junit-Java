@@ -27,9 +27,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Registration of a new account return - 201")
     public void newAccountRegistration() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, password);
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_CREATED).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_CREATED)
+                .body(
                         "userID", is(notNullValue()),
                         "username", is(notNullValue()),
                         "books", is(notNullValue()),
@@ -42,9 +43,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with blank userName return - 400")
     public void createAnAccountWithBlankUserName() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", password);
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_BAD_REQUEST).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .body(
                         "code", is("1200"),
                         "message", is("UserName and Password required."));
     }
@@ -54,9 +56,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with blank password return - 400")
     public void createAnAccountWithBlankPassword() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "");
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_BAD_REQUEST).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .body(
                         "code", is("1200"),
                         "message", is("UserName and Password required."));
     }
@@ -66,9 +69,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with blank username and password return - 400")
     public void createAnAccountWithBlankUsernameAndPassword() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", "");
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_BAD_REQUEST).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .body(
                         "code", is("1200"),
                         "message", is("UserName and Password required."));
     }
@@ -78,9 +82,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with a password that does not contain special characters return - 400")
     public void createAnAccountWithaPasswordThatDoesNotContainSpecialCharacters() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "passwd");
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_BAD_REQUEST).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .body(
                         "code", is("1300"),
                         "message", is(
                                 "Passwords must have at least one non alphanumeric character, " +
@@ -94,9 +99,10 @@ public class RegistUserTest extends BaseTest {
     @DisplayName("Create an account with the same data as an existing account return - 400")
     public void createAnAccountWithTheSameDataAsAnExistingAccount() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("user1", password);
-        registUser(UserForRegistration).then().
-                statusCode(HttpStatus.SC_NOT_ACCEPTABLE).
-                body(
+        registUser(UserForRegistration)
+                .then()
+                .statusCode(HttpStatus.SC_NOT_ACCEPTABLE)
+                .body(
                         "code", is("1204"),
                         "message", is("User exists!"));
     }
