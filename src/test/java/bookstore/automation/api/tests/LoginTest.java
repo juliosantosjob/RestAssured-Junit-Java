@@ -25,14 +25,9 @@ public class LoginTest extends BaseTest {
     @Tag("loginSuccess")
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
-<<<<<<< HEAD
         LoginDmn user = new LoginDmn(userName, password);
         login(user).
                 then().
-=======
-        Login user = new Login(userName, password);
-        login(user).then().
->>>>>>> 8ebb135a3d641b1a652fc9d0ff543b1e19822dda
                 statusCode(HttpStatus.SC_OK).
                 body(
                         "token", is(notNullValue()),
