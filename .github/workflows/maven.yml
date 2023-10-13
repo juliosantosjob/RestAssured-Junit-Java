@@ -2,9 +2,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
   schedule:
     - cron: "0 12,20 * * 1-5"
@@ -23,11 +23,8 @@ jobs:
       - name: Build Project
         run: mvn clean install -DskipTests
 
-      - name: Runner tests with Chrome
-        if: always()
-        env:
-          URL_HOM: ${{ secrets.URL_HOM }}
-        run: mvn test -DENV=hmg-actions -DBROWSER=chrome-headless
+      - name: Run API Tests
+        run: mvn test
 
       - name: Get Allure History
         uses: actions/checkout@v2
