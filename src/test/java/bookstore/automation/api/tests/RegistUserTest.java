@@ -23,7 +23,7 @@ public class RegistUserTest extends BaseTest {
     private final String password = getSecret("PASSWORD");
 
     @Test
-    @Tag("RegistNewAccount")
+    @Tag("rgtNewAccount")
     @DisplayName("Registration of a new account return - 201")
     public void newAccountRegistration() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, password);
@@ -38,7 +38,7 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @Tag("blankUserName")
+    @Tag("rgtBlankUserName")
     @DisplayName("Create an account with blank userName return - 400")
     public void createAnAccountWithBlankUserName() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", password);
@@ -50,7 +50,7 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @Tag("blankPassword")
+    @Tag("rgtBlankPassword")
     @DisplayName("Create an account with blank password return - 400")
     public void createAnAccountWithBlankPassword() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "");
@@ -62,7 +62,7 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @Tag("blankUserNamePasswd")
+    @Tag("rgtBlankUserNamePasswd")
     @DisplayName("Create an account with blank username and password return - 400")
     public void createAnAccountWithBlankUsernameAndPassword() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", "");
@@ -74,7 +74,7 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @Tag("notCharacters")
+    @Tag("rgtNotCharacters")
     @DisplayName("Create an account with a password that does not contain special characters return - 400")
     public void createAnAccountWithaPasswordThatDoesNotContainSpecialCharacters() {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "passwd");
@@ -90,7 +90,7 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @Tag("existingAccount")
+    @Tag("rgtExistingAccount")
     @DisplayName("Create an account with the same data as an existing account return - 400")
     public void createAnAccountWithTheSameDataAsAnExistingAccount() {
         RegistUserDmn UserForRegistration = new RegistUserDmn("user1", password);
