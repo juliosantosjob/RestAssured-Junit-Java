@@ -26,10 +26,10 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
         LoginDmn user = new LoginDmn(userName, password);
-        login(user).
-                then().
-                statusCode(HttpStatus.SC_OK).
-                body(
+        login(user)
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .body(
                         "token", is(notNullValue()),
                         "expires", is(notNullValue()),
                         "status", is("Success"),
@@ -41,8 +41,9 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login with invalid username return - 400")
     public void loginWithInvalidUsername() {
         LoginDmn user = new LoginDmn("invalid_userName", password);
-        login(user).then().
-                body(
+        login(user)
+                .then()
+                .body(
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
     }
@@ -52,19 +53,21 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login with invalid password return - 400")
     public void loginWithInvalidPassword() {
         LoginDmn user = new LoginDmn(userName, "invalid_password");
-        login(user).then().
-                body(
+        login(user)
+                .then()
+                .body(
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
     }
 
     @Test
-    @Tag("invalidLoginPasswd")
+    @Tag("invalidUsrPasswd")
     @DisplayName("Login with invalid username and password  return - 400")
     public void loginWithInvalidUsernameAndPassword() {
         LoginDmn user = new LoginDmn("invalid_userName", "invalid_password");
-        login(user).then().
-                body(
+        login(user)
+                .then()
+                .body(
                         "status", is("Failed"),
                         "result", is("User authorization failed."));
     }
