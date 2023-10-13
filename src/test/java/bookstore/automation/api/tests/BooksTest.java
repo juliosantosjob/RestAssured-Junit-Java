@@ -41,18 +41,4 @@ public class BooksTest extends BaseTest {
                         "books[0].subTitle", is("A Working Introduction"));
     }
 
-    @BeforeEach
-    public void hoockBefore() {
-        token = login(user)
-                .then()
-                .extract()
-                .path("token").toString();
-    }
-
-    @Test
-    @Tag("removeBooks")
-    @DisplayName("Add and remove a book from the favorites list")
-    public void addAndRemoveABookFromTheFavoritesList() {
-
-    }
 }
