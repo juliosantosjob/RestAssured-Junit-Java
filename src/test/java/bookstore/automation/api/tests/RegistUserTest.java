@@ -4,13 +4,11 @@ import bookstore.automation.api.support.BaseTest;
 import bookstore.automation.api.domain.RegistUserDmn;
 import org.apache.http.HttpStatus;
 
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
-
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.*;
 
 import static bookstore.automation.api.payloads.RegistUserPld.registUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -18,6 +16,7 @@ import static org.hamcrest.Matchers.*;
  */
 
 @Tag("regression")
+@TestMethodOrder(OrderAnnotation.class)
 public class RegistUserTest extends BaseTest {
     private final String userName = faker.address().firstName();
     private final String password = getSecret("PASSWORD");
@@ -29,13 +28,12 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, password);
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_CREATED)
-                .body(
-                        "userID", is(notNullValue()),
-                        "username", is(notNullValue()),
-                        "books", is(notNullValue()),
-                        "username", is(userName),
-                        "books", empty());
+                    .statusCode(HttpStatus.SC_CREATED)
+                    .body("userID", is(notNullValue()))
+                    .body("username", is(notNullValue()))
+                    .body("books", is(notNullValue()))
+                    .body("username", is(userName))
+                    .body("books", is(empty()));
     }
 
     @Test
@@ -45,10 +43,9 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", password);
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(
-                        "code", is("1200"),
-                        "message", is("UserName and Password required."));
+                    .statusCode(HttpStatus.SC_BAD_REQUEST)
+                    .body("code", is("1200"))
+                    .body("message", is("UserName and Password required."));
     }
 
     @Test
@@ -58,10 +55,9 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "");
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(
-                        "code", is("1200"),
-                        "message", is("UserName and Password required."));
+                    .statusCode(HttpStatus.SC_BAD_REQUEST)
+                    .body("code", is("1200"))
+                    .body("message", is("UserName and Password required."));
     }
 
     @Test
@@ -71,10 +67,9 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn("", "");
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(
-                        "code", is("1200"),
-                        "message", is("UserName and Password required."));
+                    .statusCode(HttpStatus.SC_BAD_REQUEST)
+                    .body("code", is("1200"))
+                    .body("message", is("UserName and Password required."));
     }
 
     @Test
@@ -84,14 +79,13 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "passwd");
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .body(
-                        "code", is("1300"),
-                        "message", is(
-                                "Passwords must have at least one non alphanumeric character, " +
-                                "one digit (\'0\'-\'9\'), one uppercase (\'A\'-\'Z\'), " +
-                                "one lowercase (\'a\'-\'z\'), one special character and " +
-                                "Password must be eight characters or longer."));
+                    .statusCode(HttpStatus.SC_BAD_REQUEST)
+                    .body("code", is("1300"))
+                    .body("message", is(
+                                    "Passwords must have at least one non alphanumeric character, " +
+                                    "one digit (\'0\'-\'9\'), one uppercase (\'A\'-\'Z\'), " +
+                                    "one lowercase (\'a\'-\'z\'), one special character and " +
+                                    "Password must be eight characters or longer."));
     }
 
     @Test
@@ -101,10 +95,9 @@ public class RegistUserTest extends BaseTest {
         RegistUserDmn UserForRegistration = new RegistUserDmn("user1", password);
         registUser(UserForRegistration)
                 .then()
-                .statusCode(HttpStatus.SC_NOT_ACCEPTABLE)
-                .body(
-                        "code", is("1204"),
-                        "message", is("User exists!"));
+                    .statusCode(HttpStatus.SC_NOT_ACCEPTABLE)
+                    .body("code", is("1204"))
+                    .body("message", is("User exists!"));
     }
 
 }

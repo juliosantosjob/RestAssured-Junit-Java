@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static bookstore.automation.api.payloads.DeleteAccountsPld.deletUser;
-import static bookstore.automation.api.payloads.LoginPld.login;
+import static bookstore.automation.api.payloads.LoginPld.loginUser;
 import static bookstore.automation.api.payloads.RegistUserPld.registUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 import static org.hamcrest.Matchers.*;
@@ -24,25 +24,31 @@ public class DeleteAccountTest extends BaseTest {
     private final String password = getSecret("PASSWORD");
     private final LoginDmn user = new LoginDmn(userName, password);
 
-    private String token;
+    private String accessToken;
     private String accountId;
 
     @BeforeEach
     public void hookBefore() {
-        accountId = registUser(user).then().extract()
-                .path("userID").toString();
-        token = login(user).then().extract()
-                .path("token").toString();
+        accountId = registUser(user)
+                .then()
+                    .extract()
+                    .path("userID")
+                    .toString();
+        accessToken = loginUser(user)
+                .then()
+                    .extract()
+                    .path("token")
+                    .toString();
     }
 
     @Test
     @Tag("dltAccount")
     @DisplayName("Delete account return - 204")
     public void deleteAccount() {
-        deletUser(token, accountId)
+        deletUser(accessToken, accountId)
                 .then()
-                .statusCode(HttpStatus.SC_NO_CONTENT)
-                .body(is(""));
+                    .statusCode(HttpStatus.SC_NO_CONTENT)
+                    .body(is(""));
     }
 
     @Test
@@ -50,13 +56,11 @@ public class DeleteAccountTest extends BaseTest {
     @DisplayName("Delet non-existent user return code - 1207")
     public void deletNonExistentUser() {
         accountId = "invalid_user_id";
-        deletUser(token, accountId)
+        deletUser(accessToken, accountId)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
-                .body(
-                        "code", is("1207"),
-                        "message", is("User Id not correct!")
-                );
+                    .statusCode(HttpStatus.SC_OK)
+                    .body("code", is("1207"))
+                    .body("message", is("User Id not correct!"));
     }
 
 }

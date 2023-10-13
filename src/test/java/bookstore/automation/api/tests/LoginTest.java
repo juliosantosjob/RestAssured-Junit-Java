@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import static bookstore.automation.api.payloads.LoginPld.login;
+import static bookstore.automation.api.payloads.LoginPld.loginUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 import static org.hamcrest.Matchers.*;
 
@@ -26,14 +26,13 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
         LoginDmn user = new LoginDmn(userName, password);
-        login(user)
+        loginUser(user)
                 .then()
-                .statusCode(HttpStatus.SC_OK)
-                .body(
-                        "token", is(notNullValue()),
-                        "expires", is(notNullValue()),
-                        "status", is("Success"),
-                        "result", is("User authorized successfully."));
+                    .statusCode(HttpStatus.SC_OK)
+                    .body("token", is(notNullValue()))
+                    .body("expires", is(notNullValue()))
+                    .body("status", is("Success"))
+                    .body("result", is("User authorized successfully."));
     }
 
     @Test
@@ -41,11 +40,10 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login with invalid username return - 400")
     public void loginWithInvalidUsername() {
         LoginDmn user = new LoginDmn("invalid_userName", password);
-        login(user)
+        loginUser(user)
                 .then()
-                .body(
-                        "status", is("Failed"),
-                        "result", is("User authorization failed."));
+                    .body("status", is("Failed"))
+                    .body("result", is("User authorization failed."));
     }
 
     @Test
@@ -53,11 +51,10 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login with invalid password return - 400")
     public void loginWithInvalidPassword() {
         LoginDmn user = new LoginDmn(userName, "invalid_password");
-        login(user)
+        loginUser(user)
                 .then()
-                .body(
-                        "status", is("Failed"),
-                        "result", is("User authorization failed."));
+                    .body("status", is("Failed"))
+                    .body("result", is("User authorization failed."));
     }
 
     @Test
@@ -65,11 +62,10 @@ public class LoginTest extends BaseTest {
     @DisplayName("Login with invalid username and password  return - 400")
     public void loginWithInvalidUsernameAndPassword() {
         LoginDmn user = new LoginDmn("invalid_userName", "invalid_password");
-        login(user)
+        loginUser(user)
                 .then()
-                .body(
-                        "status", is("Failed"),
-                        "result", is("User authorization failed."));
+                    .body("status", is("Failed"))
+                    .body("result", is("User authorization failed."));
     }
 
 }

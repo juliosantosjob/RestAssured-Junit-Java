@@ -5,7 +5,7 @@ import io.restassured.response.Response;
 
 public class LoginPld {
 
-    public static Response login(Object user) {
+    public static Response loginUser(Object user) {
         return RestAssured
                 .given()
                 .body(user)
