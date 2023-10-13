@@ -10,7 +10,7 @@ public class LoginPld {
                 .given()
                 .body(user)
                 .when()
-                .post("/GenerateToken");
+                .post("/Account/v1/GenerateToken");
     }
 
 }

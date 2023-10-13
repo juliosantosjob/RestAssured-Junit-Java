@@ -10,7 +10,7 @@ public class DeleteAccountsPld {
                 .given()
                 .header("Authorization", "Bearer " + token)
                 .when()
-                .delete("/User/" + accountId);
+                .delete("/Account/v1/User/" + accountId);
     }
 
 }

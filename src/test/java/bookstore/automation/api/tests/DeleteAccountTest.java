@@ -1,5 +1,6 @@
 package bookstore.automation.api.tests;
 
+import bookstore.automation.api.domain.LoginDmn;
 import bookstore.automation.api.support.BaseTest;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import static bookstore.automation.api.payloads.DeleteAccountsPld.deletUser;
+import static bookstore.automation.api.payloads.LoginPld.login;
+import static bookstore.automation.api.payloads.RegistUserPld.registUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
-import static bookstore.automation.api.utils.RequestsHelper.getUserId;
-import static bookstore.automation.api.utils.RequestsHelper.getTokenLoginUer;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -21,13 +22,17 @@ import static org.hamcrest.Matchers.*;
 public class DeleteAccountTest extends BaseTest {
     private final String userName = faker.address().firstName();
     private final String password = getSecret("PASSWORD");
+    private final LoginDmn user = new LoginDmn(userName, password);
+
     private String token;
     private String accountId;
 
     @BeforeEach
     public void hookBefore() {
-        accountId = getUserId(userName, password);
-        token = getTokenLoginUer(userName, password);
+        accountId = registUser(user).then().extract()
+                .path("userID").toString();
+        token = login(user).then().extract()
+                .path("token").toString();
     }
 
     @Test
@@ -49,8 +54,8 @@ public class DeleteAccountTest extends BaseTest {
                 .then()
                 .statusCode(HttpStatus.SC_OK)
                 .body(
-                    "code", is("1207"),
-                    "message", is("User Id not correct!")
+                        "code", is("1207"),
+                        "message", is("User Id not correct!")
                 );
     }
 
