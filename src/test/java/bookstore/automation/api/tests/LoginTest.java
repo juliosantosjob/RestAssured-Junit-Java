@@ -1,10 +1,11 @@
 package bookstore.automation.api.tests;
 
-import bookstore.automation.api.domain.Login;
+import bookstore.automation.api.domain.LoginDmn;
 import bookstore.automation.api.support.BaseTest;
 
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static bookstore.automation.api.payloads.LoginPld.login;
@@ -15,14 +16,16 @@ import static org.hamcrest.Matchers.*;
  * @author Julio C. Santos
  */
 
+@Tag("regression")
 public class LoginTest extends BaseTest {
-    private static final String userName = getSecret("NAME");
-    private static final String password = getSecret("PASSWORD");
+    private final String userName = getSecret("NAME");
+    private final String password = getSecret("PASSWORD");
 
     @Test
+    @Tag("loginSuccess")
     @DisplayName("Login sucessfully return - 200")
     public void loginSucessfully() {
-        Login user = new Login(userName, password);
+        LoginDmn user = new LoginDmn(userName, password);
         login(user).
                 then().
                 statusCode(HttpStatus.SC_OK).
@@ -34,9 +37,10 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Tag("invalidUserName")
     @DisplayName("Login with invalid username return - 400")
     public void loginWithInvalidUsername() {
-        Login user = new Login("invalid_userName", password);
+        LoginDmn user = new LoginDmn("invalid_userName", password);
         login(user).then().
                 body(
                         "status", is("Failed"),
@@ -44,9 +48,10 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Tag("invalidPassword")
     @DisplayName("Login with invalid password return - 400")
     public void loginWithInvalidPassword() {
-        Login user = new Login(userName, "invalid_password");
+        LoginDmn user = new LoginDmn(userName, "invalid_password");
         login(user).then().
                 body(
                         "status", is("Failed"),
@@ -54,9 +59,10 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
+    @Tag("invalidLoginPasswd")
     @DisplayName("Login with invalid username and password  return - 400")
     public void loginWithInvalidUsernameAndPassword() {
-        Login user = new Login("invalid_userName", "invalid_password");
+        LoginDmn user = new LoginDmn("invalid_userName", "invalid_password");
         login(user).then().
                 body(
                         "status", is("Failed"),

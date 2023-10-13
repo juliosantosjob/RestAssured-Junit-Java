@@ -1,16 +1,16 @@
 package bookstore.automation.api.utils;
 
-import bookstore.automation.api.domain.Login;
+import bookstore.automation.api.domain.LoginDmn;
 import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 
 public class RequestsHelper {
 
     public static String getTokenLoginUer(String userName, String Password) {
-        Login loginUsr = new Login(userName, Password);
+        LoginDmn user = new LoginDmn(userName, Password);
         return RestAssured.
                 given().
-                body(loginUsr).
+                body(user).
                 when().
                 post("/GenerateToken").
                 then().
@@ -18,12 +18,11 @@ public class RequestsHelper {
                 extract().path("token").toString();
     }
 
-
     public static String getUserId(String userName, String Password) {
-        Login loginUsr = new Login(userName, Password);
+        LoginDmn user = new LoginDmn(userName, Password);
         return RestAssured.
                 given().
-                body(loginUsr).
+                body(user).
                 when().
                 post("/User").
                 then().

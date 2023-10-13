@@ -1,12 +1,12 @@
 package bookstore.automation.api.domain;
 
-public class Login {
+public class LoginDmn {
     private String userName;
     private String password;
 
-    public Login() {}
+    public LoginDmn() {}
 
-    public Login(String userName, String password) {
+    public LoginDmn(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

@@ -1,5 +1,6 @@
 package bookstore.automation.api.support;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -11,9 +12,10 @@ import org.junit.jupiter.api.BeforeEach;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 
 public class BaseTest {
-    private static final String baseUrl = getSecret("BASE_URL");
-    private static final String basePath = getSecret("BASE_PATH");
-    private static final Long timeout = 3000L;
+    protected static final Faker faker = new Faker();
+    private final String baseUrl = getSecret("BASE_URL");
+    private final String basePath = getSecret("BASE_PATH");
+    private final Long timeout = 3000L;
 
     @BeforeEach
     public void setup() {

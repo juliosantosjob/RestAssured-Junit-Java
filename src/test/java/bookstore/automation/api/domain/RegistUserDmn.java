@@ -1,12 +1,12 @@
 package bookstore.automation.api.domain;
 
-public class RegistUser {
+public class RegistUserDmn {
     private String userName;
     private String password;
 
-    public RegistUser() {}
+    public RegistUserDmn() {}
 
-    public RegistUser(String userName, String password) {
+    public RegistUserDmn(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }

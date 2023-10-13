@@ -1,12 +1,11 @@
 package bookstore.automation.api.tests;
 
 import bookstore.automation.api.support.BaseTest;
-import bookstore.automation.api.domain.RegistUser;
+import bookstore.automation.api.domain.RegistUserDmn;
 import org.apache.http.HttpStatus;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import com.github.javafaker.Faker;
 
 import org.junit.jupiter.api.DisplayName;
 
@@ -18,17 +17,17 @@ import static org.hamcrest.Matchers.*;
  * @author Julio C. Santos
  */
 
+@Tag("regression")
 public class RegistUserTest extends BaseTest {
-    private final Faker faker = new Faker();
     private final String userName = faker.address().firstName();
-    private static final String password = getSecret("PASSWORD");
+    private final String password = getSecret("PASSWORD");
 
     @Test
-    @DisplayName("Registration of a new account return 201")
+    @Tag("RegistNewAccount")
+    @DisplayName("Registration of a new account return - 201")
     public void newAccountRegistration() {
-        RegistUser UserRegistration = new RegistUser(userName, password);
-
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn(userName, password);
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_CREATED).
                 body(
                         "userID", is(notNullValue()),
@@ -39,11 +38,11 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Create an account with blank userName return 400")
+    @Tag("blankUserName")
+    @DisplayName("Create an account with blank userName return - 400")
     public void createAnAccountWithBlankUserName() {
-        RegistUser UserRegistration = new RegistUser("", password);
-
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn("", password);
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
                         "code", is("1200"),
@@ -51,11 +50,11 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Create an account with blank password return 400")
+    @Tag("blankPassword")
+    @DisplayName("Create an account with blank password return - 400")
     public void createAnAccountWithBlankPassword() {
-        RegistUser UserRegistration = new RegistUser(userName, "");
-
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "");
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
                         "code", is("1200"),
@@ -63,10 +62,11 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Create an account with blank username and password")
+    @Tag("blankUserNamePasswd")
+    @DisplayName("Create an account with blank username and password return - 400")
     public void createAnAccountWithBlankUsernameAndPassword() {
-        RegistUser UserRegistration = new RegistUser("", "");
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn("", "");
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
                         "code", is("1200"),
@@ -74,11 +74,11 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Create an account with a password that does not contain special characters return 400")
+    @Tag("notCharacters")
+    @DisplayName("Create an account with a password that does not contain special characters return - 400")
     public void createAnAccountWithaPasswordThatDoesNotContainSpecialCharacters() {
-        RegistUser UserRegistration = new RegistUser(userName, "passwd");
-
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn(userName, "passwd");
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_BAD_REQUEST).
                 body(
                         "code", is("1300"),
@@ -90,11 +90,11 @@ public class RegistUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Create an account with the same data as an existing account return 400")
+    @Tag("existingAccount")
+    @DisplayName("Create an account with the same data as an existing account return - 400")
     public void createAnAccountWithTheSameDataAsAnExistingAccount() {
-        RegistUser UserRegistration = new RegistUser("user1", password);
-
-        registUser(UserRegistration).then().
+        RegistUserDmn UserForRegistration = new RegistUserDmn("user1", password);
+        registUser(UserForRegistration).then().
                 statusCode(HttpStatus.SC_NOT_ACCEPTABLE).
                 body(
                         "code", is("1204"),
