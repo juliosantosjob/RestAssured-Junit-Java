@@ -35,6 +35,11 @@ public class LoginTest extends BaseTest {
                     .body("result", is("User authorized successfully."));
     }
 
+    /* 
+     * In the next scenarios there is no status code validation as the correct
+     * would return 'Bad Request' but the api is returning 'OK'.
+     */
+    
     @Test
     @Tag("invalidUserName")
     @DisplayName("Login with invalid username return - 400")
