@@ -13,6 +13,22 @@ Para rodar o projeto, certifique-se de que você tenha as seguintes dependência
 - Maven
 - IDE de sua escolha (como IntelliJ IDEA ou Eclipse)
 
+### Instalação do projeto 
+
+Para instalar o projeto em sua maquina basta executar o comando:
+
+```
+mvn clean install
+```
+
+### Execução 
+
+Para excutar o projeto basta rodar o comando:
+
+```
+mvn test
+```
+
 ### Reportes
 
 Para acessar o histórico das execuções do projeto
