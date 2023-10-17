@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
 public class BooksTest extends BaseTest {
 
     @Test
-    @Tag("accssBooks")
+    @Tag("accessBooks")
     @DisplayName("Access a list of available books return - 200")
     public void accessAListOfAvailableBooks() {
         getBookList()

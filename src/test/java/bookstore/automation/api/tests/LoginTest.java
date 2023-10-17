@@ -23,8 +23,8 @@ public class LoginTest extends BaseTest {
 
     @Test
     @Tag("loginSuccess")
-    @DisplayName("Login sucessfully return - 200")
-    public void loginSucessfully() {
+    @DisplayName("Login successfully return - 200")
+    public void loginSuccessfully() {
         LoginDmn user = new LoginDmn(userName, password);
         loginUser(user)
                 .then()

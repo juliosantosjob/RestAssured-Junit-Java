@@ -3,12 +3,12 @@ package bookstore.automation.api.payloads;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-public class RegistUserPld {
+public class RegisterUserPld {
 
-    public static Response registUser(Object objectUserRegist) {
+    public static Response registerUser(Object objectUserRegister) {
         return RestAssured
                 .given()
-                .body(objectUserRegist)
+                .body(objectUserRegister)
                 .when()
                 .post("/Account/v1/User");
     }

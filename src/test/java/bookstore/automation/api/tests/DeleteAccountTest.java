@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import static bookstore.automation.api.payloads.DeleteAccountsPld.deletUser;
+import static bookstore.automation.api.payloads.DeleteAccountsPld.deleteUser;
 import static bookstore.automation.api.payloads.LoginPld.loginUser;
-import static bookstore.automation.api.payloads.RegistUserPld.registUser;
+import static bookstore.automation.api.payloads.RegisterUserPld.registerUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 import static org.hamcrest.Matchers.*;
 
@@ -29,7 +29,7 @@ public class DeleteAccountTest extends BaseTest {
 
     @BeforeEach
     public void hookBefore() {
-        accountId = registUser(user)
+        accountId = registerUser(user)
                 .then()
                     .extract()
                     .path("userID")
@@ -45,7 +45,7 @@ public class DeleteAccountTest extends BaseTest {
     @Tag("dltAccount")
     @DisplayName("Delete account return - 204")
     public void deleteAccount() {
-        deletUser(accessToken, accountId)
+        deleteUser(accessToken, accountId)
                 .then()
                     .statusCode(HttpStatus.SC_NO_CONTENT)
                     .body(is(""));
@@ -56,7 +56,7 @@ public class DeleteAccountTest extends BaseTest {
     @DisplayName("Delet non-existent user return code - 1207")
     public void deletNonExistentUser() {
         accountId = "invalid_user_id";
-        deletUser(accessToken, accountId)
+        deleteUser(accessToken, accountId)
                 .then()
                     .statusCode(HttpStatus.SC_OK)
                     .body("code", is("1207"))

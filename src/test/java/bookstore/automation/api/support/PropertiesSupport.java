@@ -7,7 +7,7 @@ import java.util.Properties;
 import static java.lang.System.out;
 
 public class PropertiesSupport {
-    private static final String pathProp = "/src/test/resources/host.properties";
+    private static final String pathProp = "/src/test/resources/secrets.properties";
     private static final String pathSystem = System.getProperty("user.dir");
     private static Properties prop;
 
