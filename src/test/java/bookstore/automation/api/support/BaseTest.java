@@ -14,11 +14,11 @@ import static bookstore.automation.api.support.PropertiesSupport.getSecret;
 public class BaseTest {
     protected static final Faker faker = new Faker();
     private final String baseUrl = getSecret("BASE_URL");
-    private Long timeout;
+    private final Long timeout = 3000L;
 
     @BeforeEach
     public void setup() {
-        timeout = 3000L;
+
         RestAssured.baseURI = baseUrl;
 
         // Definindo ContentTypeJson como padrão para todos os testes
