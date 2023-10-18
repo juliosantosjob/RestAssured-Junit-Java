@@ -8,7 +8,6 @@ public class BooksPld {
     public static Response getBookList() {
         return RestAssured
                 .given()
-                .when()
                 .get("/BookStore/v1/Books");
     }
 }
