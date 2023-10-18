@@ -9,7 +9,6 @@ public class DeleteAccountsPld {
         return RestAssured
                 .given()
                 .header("Authorization", "Bearer " + token)
-                .when()
                 .delete("/Account/v1/User/" + accountId);
     }
 
