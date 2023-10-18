@@ -9,7 +9,6 @@ public class LoginPld {
         return RestAssured
                 .given()
                 .body(user)
-                .when()
                 .post("/Account/v1/GenerateToken");
     }
 
