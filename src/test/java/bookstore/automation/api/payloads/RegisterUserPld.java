@@ -9,7 +9,6 @@ public class RegisterUserPld {
         return RestAssured
                 .given()
                 .body(objectUserRegister)
-                .when()
                 .post("/Account/v1/User");
     }
 
