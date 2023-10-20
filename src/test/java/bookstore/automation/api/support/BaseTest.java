@@ -18,7 +18,7 @@ public class BaseTest {
 
     @BeforeEach
     public void setup() {
-
+        // Adicionando a base Url do projeto
         RestAssured.baseURI = baseUrl;
 
         // Definindo ContentTypeJson como padrão para todos os testes
