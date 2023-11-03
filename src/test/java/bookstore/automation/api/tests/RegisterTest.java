@@ -8,7 +8,6 @@ import org.junit.jupiter.api.*;
 
 import static bookstore.automation.api.payloads.RegisterUserPld.registerUser;
 import static bookstore.automation.api.support.PropertiesSupport.getSecret;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import static org.hamcrest.Matchers.*;
 
 /**
@@ -16,7 +15,6 @@ import static org.hamcrest.Matchers.*;
  */
 
 @Tag("regression")
-@TestMethodOrder(OrderAnnotation.class)
 public class RegisterTest extends BaseTest {
     private final String userName = faker.address().firstName();
     private final String password = getSecret("PASSWORD");
