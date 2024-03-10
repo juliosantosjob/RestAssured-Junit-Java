@@ -1,6 +1,7 @@
 package bookstore.automation.api.tests;
 
 import bookstore.automation.api.support.BaseTest;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,7 @@ public class BooksTest extends BaseTest {
 
         getBookList()
                 .then()
+                .statusCode(HttpStatus.SC_OK)
                 .body("books[" + randomIndex + "].isbn", is(isbn))
                 .body("books[" + randomIndex + "].title", is(title))
                 .body("books[" + randomIndex + "].subTitle", is(subTitle));
