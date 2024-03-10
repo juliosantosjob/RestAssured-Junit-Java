@@ -43,7 +43,7 @@ public class BooksTest extends BaseTest {
             subTitle = (String) books.get(randomIndex).get("subTitle");
 
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         getBookList()
