@@ -12,7 +12,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mavenSurefire.version>2.22.2</mavenSurefire.version>
+<!--        <mavenSurefire.version>2.22.2</mavenSurefire.version>-->
         <aspectj.version>1.8.10</aspectj.version>
         <restAssured.version>4.3.0</restAssured.version>
         <junitJupiter.version>5.9.2</junitJupiter.version>
@@ -20,6 +20,7 @@
         <jackson.version>2.15.2</jackson.version>
         <javafaker.version>1.0.2</javafaker.version>
         <allureJ5.version>2.23.0</allureJ5.version>
+        <yml.version>1.30</yml.version>
     </properties>
 
     <dependencies>
@@ -53,24 +54,10 @@
             <artifactId>allure-junit5</artifactId>
             <version>${allureJ5.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${yml.version}</version>
+        </dependency>
     </dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${mavenSurefire.version}</version>
-                <configuration>
-                    <excludes>**/RunningTests.java</excludes>
-                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>${aspectj.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
 </project>

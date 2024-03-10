@@ -10,7 +10,13 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectClasses({ DeleteAccountTest.class, LoginTest.class, RegisterTest.class, BooksTest.class })
+@SelectClasses({
+        DeleteAccountTest.class,
+        LoginTest.class,
+        RegisterTest.class,
+        BooksTest.class
+})
 @SelectPackages("src/test/java/bookstore/automation/api/tests")
 @IncludeTags("regression")
-public class RunningTests {}
+public class RunningTests {
+}
