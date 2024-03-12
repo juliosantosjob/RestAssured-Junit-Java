@@ -32,7 +32,6 @@ public class BooksTest extends BaseTest {
     @Tag("accessBooks")
     @DisplayName("Access a list of available books return - 200")
     public void accessAListOfAvailableBooks() {
-
         try (FileInputStream inputStream = new FileInputStream(pathYml);){
             Map<String, Object> data = yaml.load(inputStream);
             List<Map<String, Object>> books = (List<Map<String, Object>>) data.get("books");
